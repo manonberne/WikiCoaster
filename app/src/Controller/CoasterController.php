@@ -41,7 +41,7 @@ class CoasterController extends AbstractController
     }
 
     #[Route('/coaster/{id}/edit')]
-    public function edit(Coaster $coaster, Request $request, EntityManagerInterface $em)
+    public function edit(Coaster $entity, Request $request, EntityManagerInterface $em)
     {
        
         $form = $this->createForm(CoasterType::class, $entity);
@@ -53,6 +53,24 @@ class CoasterController extends AbstractController
 
             return $this->redirectToRoute('app_coaster_index');
         }
-        return $this->render('coaster/');
+        return $this->render('coaster/edit.html.twig', ['coasterForm' => $form,]);
+    }
+
+    #[Route('/coaster/{id}/delete')]
+    public function delete(Coaster $coaster, Request $request, EntityManagerInterface $em): Response
+    {
+        if ($request->isMethod('POST')) { 
+            if ($this->isCsrfTokenValid(
+                'delete'.$coaster->getId(),
+                $request->request->get('_token')
+            )) {
+                $em->remove($coaster);
+                $em->flush();
+
+                return $this->redirectToRoute('app_coaster_index');
+            }
+        }
+        return $this->render('coaster/delete.html.twig', ['coaster' => $coaster,]);
+        
     }
 }

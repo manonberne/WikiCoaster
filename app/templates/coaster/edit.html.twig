@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{{ form_start(coasterForm) }}
+{{ form_widget(coasterForm) }}
+<button type="modifier" class="btn btn-primary">Modifier</button>
+{{ form_end(coasterForm) }}
+{% endblock %}

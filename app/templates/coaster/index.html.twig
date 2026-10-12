@@ -22,7 +22,10 @@
                     <td>{{ coaster.maxSpeed }}</td>
                     <td>{{ coaster.length }}</td>
                     <td>{{ coaster.maxHeight }}</td>
-                    <td></td>
+                    <td>
+                        <a href="{{ path('app_coaster_edit', {'id':coaster.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path('app_coaster_delete', {'id':coaster.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
