@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Coaster;
 use App\Form\CoasterType;
+use App\Repository\CoasterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +25,34 @@ class CoasterController extends AbstractController
             $em->persist($entity);//Ajoute l'entité dans le manager
             $em->flush();//exécute les requetes
 
-            return $this->redirectToRoute('app_coaster_add');
+            return $this->redirectToRoute('app_base_home');
         }
  
 
         return $this->render('coaster/add.html.twig', ['coasterForm' => $form,]);
+    }
+    
+    #[Route('/coaster/index')]
+    public function index(CoasterRepository $repository): Response
+    {
+        $coasters = $repository->findAll();
+
+        return $this->render('coaster/index.html.twig', ['coasters' => $coasters]);
+    }
+
+    #[Route('/coaster/{id}/edit')]
+    public function edit(Coaster $coaster, Request $request, EntityManagerInterface $em)
+    {
+       
+        $form = $this->createForm(CoasterType::class, $entity);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $em->flush();//exécute les requetes
+
+            return $this->redirectToRoute('app_coaster_index');
+        }
+        return $this->render('coaster/');
     }
 }
