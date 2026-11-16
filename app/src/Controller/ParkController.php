@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/park')]
 final class ParkController extends AbstractController
@@ -23,6 +24,7 @@ final class ParkController extends AbstractController
     }
 
     #[Route('/new', name: 'app_park_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $park = new Park();
@@ -51,6 +53,7 @@ final class ParkController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_park_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Park $park, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ParkType::class, $park);
@@ -69,6 +72,7 @@ final class ParkController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_park_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function delete(Request $request, Park $park, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$park->getId(), $request->getPayload()->getString('_token'))) {

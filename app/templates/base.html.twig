@@ -37,6 +37,17 @@
                     <a href="/category" class="py-2 bg-base-300 text-center text-base-content rounded hover:bg-neutral hover:text-neutral-content transition">
                         Category
                     </a>
+                    {% if is_granted('ROLE_USER') %}
+                    <a href="/user" class="py-2 bg-base-300 text-center text-base-content rounded hover:bg-neutral hover:text-neutral-content transition">
+                        Users
+                    </a>
+                    {% endif %}
+                    <a href="/register" class="py-2 bg-base-300 text-center text-base-content rounded hover:bg-neutral hover:text-neutral-content transition">
+                        S'inscrire
+                    </a>
+                    <a href="/login" class="py-2 bg-base-300 text-center text-base-content rounded hover:bg-neutral hover:text-neutral-content transition">
+                        Se connecter
+                    </a>
                 </div>
             </div>
             <div class="p-4 flex-grow-1">
