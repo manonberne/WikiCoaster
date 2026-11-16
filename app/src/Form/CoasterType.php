@@ -28,7 +28,12 @@ class CoasterType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
+                'query_builder' => function (EntityManagerInterface $er) : QueryBuilder {
+                    return $er->createQueryBuilder('cat')
+                        ->orderBy('cat.name', 'ASC');
+                },
             ])
+            ->add('description')
 
         ;
     }

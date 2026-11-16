@@ -22,13 +22,29 @@
     <body>
         <main class="flex flex-nowrap h-[100vh]">
             <div class="flex flex-col shrink-0 shadow w-[240px] bg-base-200">
-                <div class="py-2 bg-primary text-center text-white">Wiki Coaster</div>
+                <div class="flex flex-col gap-1 p-2">
+
+                    <a href="/" class="py-2 bg-primary text-center text-white rounded hover:bg-primary-focus transition">
+                        Wiki Coaster
+                    </a>
+
+                    <a href="/coaster/index" class="py-2 bg-base-300 text-center text-base-content rounded hover:bg-neutral hover:text-neutral-content transition">
+                        Coasters
+                    </a>
+                    <a href="/park" class="py-2 bg-base-300 text-center text-base-content rounded hover:bg-neutral hover:text-neutral-content transition">
+                        Park
+                    </a>
+                    <a href="/category" class="py-2 bg-base-300 text-center text-base-content rounded hover:bg-neutral hover:text-neutral-content transition">
+                        Category
+                    </a>
+                </div>
             </div>
             <div class="p-4 flex-grow-1">
                 <div class="bg-base-200 p-2 rounded-xs border-base-300">
                     {% block body %}{% endblock %}
                 </div>     
             </div>
+            
         </main>    
     </body>
 </html>
